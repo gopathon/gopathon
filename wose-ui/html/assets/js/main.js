@@ -120,12 +120,20 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  const toggleNavBar=()=> {
+    if(select('#navbar').classList.contains('navbar-mobile')){
+      select('#navbar-overlay').classList.remove('navbar-overlay-toggle')
+    }
+    else{
+      select('#navbar-overlay').classList.add('navbar-overlay-toggle')
+    }
     select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
+  }
+  on('click', 'ul>li>i.bi-x',toggleNavBar) 
+  on('click', '.mobile-nav-toggle', toggleNavBar)
+  on('click','#navbar-overlay', function(e){
+      toggleNavBar();
   })
-
   /**
    * Mobile nav dropdowns activate
    */
@@ -146,9 +154,9 @@
       let navbar = select('#navbar')
       if (navbar.classList.contains('navbar-mobile')) {
         navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
+        // let navbarToggle = select('.mobile-nav-toggle')
+        // navbarToggle.classList.toggle('bi-list')
+        // navbarToggle.classList.toggle('bi-x')
       }
       scrollto(this.hash)
     }
